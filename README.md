@@ -36,11 +36,11 @@ class SomeUseCase
   include Oha
 
   def call(params)
-    data_invalid if invalid_params?
+    trigger(:data_invalid) if invalid_params?
     do_something
-    success
+    trigger(:success)
   rescue SomeError
-    another_error
+    trigger(:another_error)
   end
 end
 ``
