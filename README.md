@@ -21,13 +21,29 @@ Or install it yourself as:
 
 ## Usage
 
+In the calling object:
 ```ruby
-ServiceObject.call(params) do
-    on(:success) { <something happens> }
-    on(:data_invaid) { <something happens> }
-    on(:another_error) { <something happens> }
+SomeUseCase.call(params) do
+    bind(:success).to { <something happens> }
+    bind(:data_invalid).to { <something happens> }
+    bind(:another_error).to { <something happens> }
 end
 ```
+
+The UseCase:
+```ruby
+class SomeUseCase
+  include Oha
+
+  def call(params)
+    data_invalid if invalid_params?
+    do_something
+    success
+  rescue SomeError
+    another_error
+  end
+end
+``
 
 ## Development
 
