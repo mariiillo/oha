@@ -1,7 +1,11 @@
 # Oha
 [![Build Status](https://travis-ci.org/mariiillo/oha.svg?branch=master)](https://travis-ci.org/mariiillo/oha)
 
-This gem standarize how you'll interact with Service Objects...the use of this gem will allow you to decouple your business logic from your delivery mechanism.
+Decouple the business logic from the delivery mechanist by using this gem.
+1. Define the use case.
+2. Create the UseCase class.
+3. Bind the UseCase's happy path (and the not so happy ones) to what the calling object should execute in each case. to what the calling object should execute in each case to what the calling object should execute in each case to what the calling object should execute in each case to what the calling object should execute in each case.
+4. Profit
 
 ## Installation
 
@@ -43,7 +47,7 @@ class SomeUseCase
     trigger(:another_error)
   end
 end
-``
+```
 
 ## Development
 
