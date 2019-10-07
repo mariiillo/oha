@@ -1,10 +1,10 @@
 # Oha
 [![Build Status](https://travis-ci.org/mariiillo/oha.svg?branch=master)](https://travis-ci.org/mariiillo/oha)
 
-Decouple the business logic from the delivery mechanist by using this gem.
+Decouple the business logic from the delivery mechanismt by using this gem.
 1. Define the use case.
 2. Create the UseCase class.
-3. Bind the UseCase's happy path (and the not so happy ones) to what the calling object should execute in each case. to what the calling object should execute in each case to what the calling object should execute in each case to what the calling object should execute in each case to what the calling object should execute in each case.
+3. Bind the UseCase's happy path (and the not so happy ones) to what the calling object should execute in each case.
 4. Profit
 
 ## Installation
@@ -34,7 +34,7 @@ SomeUseCase.call(params) do
 end
 ```
 
-The UseCase:
+The Use Case:
 ```ruby
 class SomeUseCase
   include Oha
