@@ -9,7 +9,7 @@ module Oha
 
   def initialize(*args, &block)
     raise NoBlockGivenError unless block_given?
-    self
+    yield self
   end
 
   module ClassMethods

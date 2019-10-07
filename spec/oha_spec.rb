@@ -22,6 +22,14 @@ RSpec.describe Oha do
         expect { call_use_case }.to_not raise_error
       end
 
+      it "yields an instance of the included class" do
+        yielded_instance = nil
+        SomeUseCase.call do |use_case_instance|
+          yielded_instance = use_case_instance
+        end
+        expect(yielded_instance.class).to eq SomeUseCase
+      end
+
     end
 
     describe "#initialize" do
