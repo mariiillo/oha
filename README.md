@@ -27,10 +27,10 @@ Or install it yourself as:
 
 In the calling object:
 ```ruby
-SomeUseCase.call(params) do
-    bind(:success).to { <something happens> }
-    bind(:data_invalid).to { <something happens> }
-    bind(:another_error).to { <something happens> }
+SomeUseCase.call(params) do |use_case|
+    bind(:success).to { redirect_to user_path(use_case.user) }
+    bind(:data_invalid).to { render :new }
+    bind(:another_error).to { do_something_different }
 end
 ```
 

@@ -2,7 +2,7 @@ require "oha/version"
 
 module Oha
   def self.included(base)
-    base.extend ClasMethods
+    base.extend ClassMethods
   end
 
   NoBlockGivenError = Class.new(StandardError)
@@ -12,7 +12,7 @@ module Oha
     self
   end
 
-  module ClasMethods
+  module ClassMethods
     def call(*args, &block)
       new(*args, &block)
     end
