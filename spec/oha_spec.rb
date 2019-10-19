@@ -36,9 +36,7 @@ RSpec.describe Oha do
       end
 
       let(:call_use_case) do
-        SomeUseCase.call(params) do |use_case|
-          use_case.bind(:success).to { puts "success trigered" }
-        end
+        SomeUseCase.call(params) { |use_case| }
       end
 
       it "sets mappings" do
@@ -57,12 +55,6 @@ RSpec.describe Oha do
         use_case = SomeUseCase.new { }
         returned_value = use_case.bind(:succes)
         expect(returned_value).to be_an_instance_of(Oha::Binder)
-      end
-
-      it "receives an event name and sets an entry in @mappings ivar" do
-        use_case = SomeUseCase.new { }
-        returned_value = use_case.bind(:succes)
-        expect(use_case.instance_variable_get(:@mappings).keys).to include :success
       end
     end
   end
