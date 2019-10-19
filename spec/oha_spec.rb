@@ -10,12 +10,11 @@ RSpec.describe Oha do
   end
 
   describe "Oha behaviour" do
+    let(:params) { double }
+
     describe ".call" do
-      let(:params) { double }
       let(:call_use_case) do
-        SomeUseCase.call(params) do
-          bind(:success).to { puts "success trigered" }
-        end
+        SomeUseCase.call(params) { |use_case| }
       end
 
       it "receives params and a block with the list of events that can be triggered" do
@@ -29,17 +28,41 @@ RSpec.describe Oha do
         end
         expect(yielded_instance.class).to eq SomeUseCase
       end
-
     end
 
     describe "#initialize" do
-      let(:params) { double }
       let(:call_use_case_without_block) do
         SomeUseCase.call(params)
       end
 
+      let(:call_use_case) do
+        SomeUseCase.call(params) do |use_case|
+          use_case.bind(:success).to { puts "success trigered" }
+        end
+      end
+
+      it "sets mappings" do
+        use_case = call_use_case
+        expect(use_case.instance_variable_get(:@mappings)).to an_instance_of(Hash)
+        expect(use_case.instance_variable_get(:@mappings)).to be_empty
+      end
+
       it "raises an Error if no block was given" do
         expect { call_use_case_without_block }.to raise_error(Oha::NoBlockGivenError)
+      end
+    end
+
+    describe "#bind" do
+      it "receives an event name and returns an Oha::Binding object" do
+        use_case = SomeUseCase.new { }
+        returned_value = use_case.bind(:succes)
+        expect(returned_value).to be_an_instance_of(Oha::Binder)
+      end
+
+      it "receives an event name and sets an entry in @mappings ivar" do
+        use_case = SomeUseCase.new { }
+        returned_value = use_case.bind(:succes)
+        expect(use_case.instance_variable_get(:@mappings).keys).to include :success
       end
     end
   end
