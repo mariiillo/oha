@@ -9,13 +9,13 @@ module Oha
 
   def initialize(*args, &block)
     raise NoBlockGivenError unless block_given?
-    @mappings = Hash.new
+    @binder = Oha::Binder.new
     yield self
     self
   end
 
   def bind(event)
-    Oha::Binder.new(event)
+    @binder.bind(event)
   end
 
   module ClassMethods

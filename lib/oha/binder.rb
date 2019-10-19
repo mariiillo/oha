@@ -1,7 +1,8 @@
 module Oha
   class Binder
-    def initialize(event)
+    def bind(event)
       @event = event
+      self
     end
 
     def to(callable_object)

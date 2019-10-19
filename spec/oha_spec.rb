@@ -40,10 +40,9 @@ RSpec.describe Oha do
         SomeUseCase.call(params) { |use_case| }
       end
 
-      it "sets mappings" do
+      it "sets @binder" do
         use_case = call_use_case
-        expect(use_case.instance_variable_get(:@mappings)).to an_instance_of(Hash)
-        expect(use_case.instance_variable_get(:@mappings)).to be_empty
+        expect(use_case.instance_variable_get(:@binder)).to an_instance_of(Oha::Binder)
       end
 
       it "raises an Error if no block was given" do
