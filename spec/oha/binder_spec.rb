@@ -16,11 +16,16 @@ module Oha
     end
 
     describe "#to" do
+      let(:instance) { described_class.new(event) }
       let(:callable_object) { double(call: "#call called") }
+
       it "receives a callable object as parameter" do
-        instance = described_class.new(event)
         expect{ instance.to(callable_object) }.to_not raise_error
         expect{ instance.to }.to raise_error ArgumentError
+      end
+
+      it "returns self" do
+        expect(instance.to(callable_object)).to be_an_instance_of(described_class)
       end
 
       it "sets the behaviour"

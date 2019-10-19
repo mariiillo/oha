@@ -5,7 +5,7 @@ module Oha
     end
 
     def to(callable_object)
-
+      self
     end
   end
 end
