@@ -27,7 +27,7 @@ RSpec.describe Oha do
         SomeUseCase.call do |use_case_instance|
           yielded_instance = use_case_instance
         end
-        expect(yielded_instance.class).to eq SomeUseCase
+        expect(yielded_instance).to be_an_instance_of SomeUseCase
       end
     end
 
@@ -42,11 +42,11 @@ RSpec.describe Oha do
 
       it "sets @binder" do
         use_case = call_use_case
-        expect(use_case.instance_variable_get(:@binder)).to an_instance_of(Oha::Binder)
+        expect(use_case.instance_variable_get(:@binder)).to be_an_instance_of Oha::Binder
       end
 
       it "raises an Error if no block was given" do
-        expect { call_use_case_without_block }.to raise_error(Oha::Errors::NoBlockGivenError)
+        expect { call_use_case_without_block }.to raise_error Oha::Errors::NoBlockGivenError
       end
     end
 
@@ -54,7 +54,7 @@ RSpec.describe Oha do
       it "receives an event name and returns an Oha::Binding object" do
         use_case = SomeUseCase.new { }
         returned_value = use_case.bind(:succes)
-        expect(returned_value).to be_an_instance_of(Oha::Binder)
+        expect(returned_value).to be_an_instance_of Oha::Binder
       end
     end
   end
