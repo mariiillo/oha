@@ -2,9 +2,9 @@ require_relative "../../lib/oha/binder"
 
 module Oha
   RSpec.describe Binder do
-    describe "#initialize" do
-      let(:event) { :some_event }
+    let(:event) { :some_event }
 
+    describe "#initialize" do
       it "receives an event name" do
         expect { Oha::Binder.new(event) }.to_not raise_error
       end
@@ -16,7 +16,13 @@ module Oha
     end
 
     describe "#to" do
-      it "receives a callable object as parameter"
+      let(:callable_object) { double(call: "#call called") }
+      it "receives a callable object as parameter" do
+        instance = described_class.new(event)
+        expect{ instance.to(callable_object) }.to_not raise_error
+        expect{ instance.to }.to raise_error ArgumentError
+      end
+
       it "sets the behaviour"
     end
   end

@@ -3,5 +3,9 @@ module Oha
     def initialize(event)
       @event = event
     end
+
+    def to(callable_object)
+
+    end
   end
 end
