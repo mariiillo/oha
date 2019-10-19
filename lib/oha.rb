@@ -15,7 +15,7 @@ module Oha
   end
 
   def bind(event)
-    Oha::Binder.new
+    Oha::Binder.new(event)
   end
 
   module ClassMethods
