@@ -2,7 +2,7 @@ require "bundler/setup"
 require "oha"
 
 require 'simplecov'
-SimpleCov.start
+SimpleCov.start if ENV["COVERAGE"]
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
