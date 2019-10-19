@@ -46,7 +46,7 @@ RSpec.describe Oha do
       end
 
       it "raises an Error if no block was given" do
-        expect { call_use_case_without_block }.to raise_error(Oha::NoBlockGivenError)
+        expect { call_use_case_without_block }.to raise_error(Oha::Errors::NoBlockGivenError)
       end
     end
 
