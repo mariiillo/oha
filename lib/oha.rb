@@ -24,8 +24,3 @@ module Oha
     end
   end
 end
-
-module Oha
-  class Binder
-  end
-end

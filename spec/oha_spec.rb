@@ -1,4 +1,5 @@
 require_relative "../lib/oha.rb"
+require_relative "../lib/oha/binder.rb"
 
 class SomeUseCase
   include Oha
