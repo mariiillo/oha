@@ -56,5 +56,10 @@ RSpec.describe Oha do
         expect(returned_value).to be_an_instance_of Oha::Binder
       end
     end
+
+    describe "#trigger" do
+      it "receives an event name as parameter"
+      it "executes the callback associated to an event"
+    end
   end
 end
