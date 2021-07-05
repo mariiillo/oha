@@ -1,27 +1,27 @@
-require_relative "../lib/oha.rb"
+require_relative '../lib/oha'
 
 class SomeUseCase
   include Oha
 end
 
 RSpec.describe Oha do
-  it "has a version number" do
+  it 'has a version number' do
     expect(Oha::VERSION).not_to be nil
   end
 
-  describe "Oha behaviour" do
+  describe 'Oha behaviour' do
     let(:params) { double }
 
-    describe ".call" do
+    describe '.call' do
       let(:call_use_case) do
         SomeUseCase.call(params) { |use_case| }
       end
 
-      it "receives params and a block with the list of events that can be triggered" do
+      it 'receives params and a block with the list of events that can be triggered' do
         expect { call_use_case }.to_not raise_error
       end
 
-      it "yields an instance of the included class" do
+      it 'yields an instance of the included class' do
         yielded_instance = nil
         SomeUseCase.call do |use_case_instance|
           yielded_instance = use_case_instance
@@ -30,7 +30,7 @@ RSpec.describe Oha do
       end
     end
 
-    describe "#initialize" do
+    describe '#initialize' do
       let(:call_use_case_without_block) do
         SomeUseCase.call(params)
       end
@@ -39,19 +39,19 @@ RSpec.describe Oha do
         SomeUseCase.call(params) { |use_case| }
       end
 
-      it "sets @binder" do
+      it 'sets @binder' do
         use_case = call_use_case
         expect(use_case.instance_variable_get(:@binder)).to be_an_instance_of Oha::Binder
       end
 
-      it "raises an Error if no block was given" do
+      it 'raises an Error if no block was given' do
         expect { call_use_case_without_block }.to raise_error Oha::Errors::NoBlockGivenError
       end
     end
 
-    describe "#trigger" do
-      it "receives an event name as parameter"
-      it "executes the callback associated to an event"
+    describe '#trigger' do
+      it 'receives an event name as parameter'
+      it 'executes the callback associated to an event'
     end
   end
 end
