@@ -60,7 +60,7 @@ class SomeUseCase
   def call(params)
     trigger(:data_invalid) if invalid_params?
     do_something
-    trigger(:success, @user)
+    trigger(:success, user: @user)
   rescue SomeError
     trigger(:another_error)
   end
