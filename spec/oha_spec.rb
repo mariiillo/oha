@@ -49,14 +49,6 @@ RSpec.describe Oha do
       end
     end
 
-    describe "#bind" do
-      it "receives an event name and returns an Oha::Binding object" do
-        use_case = SomeUseCase.new { }
-        returned_value = use_case.bind(:succes)
-        expect(returned_value).to be_an_instance_of Oha::Binder
-      end
-    end
-
     describe "#trigger" do
       it "receives an event name as parameter"
       it "executes the callback associated to an event"

@@ -17,10 +17,6 @@ module Oha
     self
   end
 
-  def bind(event)
-    @binder.bind(event)
-  end
-
   # Class methods to be added to a UseCase.
   module ClassMethods
     def call(*args, &block)
