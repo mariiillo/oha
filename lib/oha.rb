@@ -10,7 +10,8 @@ module Oha
 
   def initialize(*args, &block)
     raise Oha::Errors::NoBlockGivenError unless block_given?
-    @binder = Oha::Binder.new
+
+    @binder = Oha::Binder.new(self)
     @params = args
     yield self
     self
