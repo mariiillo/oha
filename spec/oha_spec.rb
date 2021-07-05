@@ -2,6 +2,12 @@ require_relative '../lib/oha'
 
 class SomeUseCase
   include Oha
+
+  def payload
+    {
+      foo: 'bar'
+    }
+  end
 end
 
 RSpec.describe Oha do
@@ -52,15 +58,15 @@ RSpec.describe Oha do
     describe '#trigger' do
       it 'executes the callback associated to an event' do
         subject = SomeUseCase.call(params) do |use_case|
-          use_case.bind(:foo).to(-> { 'bar' })
+          use_case.bind(:foo).to(->(payload) { "Hello #{payload[:foo]}" })
         end
 
-        expect(subject.trigger(:foo)).to eq 'bar'
+        expect(subject.trigger(:foo, { foo: 'bar' })).to eq 'Hello bar'
       end
 
       it 'receives an event name as parameter' do
         subject = SomeUseCase.call(params) do |use_case|
-          use_case.bind(:foo).to(-> { 'bar' })
+          use_case.bind(:foo).to(->(payload) { 'bar' })
         end
 
         expect { subject.trigger(:foo) }.not_to raise_error
