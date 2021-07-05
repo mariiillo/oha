@@ -1,5 +1,6 @@
 require_relative '../lib/oha'
 
+
 class SomeUseCase
   include Oha
 end
@@ -26,7 +27,7 @@ RSpec.describe Oha do
         SomeUseCase.call do |use_case_instance|
           yielded_instance = use_case_instance
         end
-        expect(yielded_instance).to be_an_instance_of SomeUseCase
+        expect(yielded_instance).to be_an_instance_of Oha::Binder
       end
     end
 
@@ -50,8 +51,16 @@ RSpec.describe Oha do
     end
 
     describe '#trigger' do
+      it 'executes the callback associated to an event' do
+        subject = SomeUseCase.call(params) do |use_case|
+          use_case.bind(:foo).to(-> { 'bar' })
+        end
+
+        expect(subject.trigger(:foo)).to eq 'bar'
+      end
+
       it 'receives an event name as parameter'
-      it 'executes the callback associated to an event'
+      it 'raises an error if the event name is unknown'
     end
   end
 end

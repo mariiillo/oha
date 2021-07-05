@@ -10,7 +10,8 @@ module Oha
       self
     end
 
-    def to(_callable_object)
+    def to(callable_object)
+      @context.set_callback(@event, callable_object)
       self
     end
   end
