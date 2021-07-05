@@ -28,25 +28,25 @@ Or install it yourself as:
 In the calling object:
 ```ruby
 SomeUseCase.call(params) do |use_case|
-    use_case.bind(:success).to { redirect_to_user }
-    use_case.bind(:data_invalid).to { render_new }
-    use_case.bind(:another_error).to { do_something_different }
+    use_case.bind(:success).to(redirect_to_user)
+    use_case.bind(:data_invalid).to(render_new)
+    use_case.bind(:another_error).to(do_something_different)
 end
 
 def redirect_to_user
-  -> (user) do
-    redirect_to user_path(user)
+  -> (payload) do
+    redirect_to user_path(payload[:user])
   end
 end
 
 def render_new
-  -> do
+  -> (_payload) do
     render :new
   end
 end
 
 def do_something_different
-  -> do
+  -> (_payload) do
     # ...
   end
 end
@@ -60,9 +60,16 @@ class SomeUseCase
   def call(params)
     trigger(:data_invalid) if invalid_params?
     do_something
-    trigger(:success)
+    trigger(:success, @user)
   rescue SomeError
     trigger(:another_error)
+  end
+  
+  private
+  
+  def do_something
+    @user = ...
+    #...
   end
 end
 ```

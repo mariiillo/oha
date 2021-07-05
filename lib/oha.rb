@@ -25,9 +25,9 @@ module Oha
     self
   end
 
-  def trigger(event)
+  def trigger(event, payload = {})
     callback = @callbacks.fetch(event.to_sym) { raise Oha::Errors::EventNotDefined }
-    callback.call
+    callback.call(payload)
   end
 
   # Class methods to be added to a UseCase.
