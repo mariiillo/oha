@@ -1,6 +1,7 @@
 require 'oha/version'
 require 'oha/binder'
 require 'oha/errors/no_block_given_error'
+require 'oha/errors/event_not_defined'
 
 # Main Module that defines all the behaviour
 # that will be added to a UseCase
@@ -25,7 +26,8 @@ module Oha
   end
 
   def trigger(event)
-    @callbacks.fetch(event.to_sym).call
+    callback = @callbacks.fetch(event.to_sym) { raise Oha::Errors::EventNotDefined }
+    callback.call
   end
 
   # Class methods to be added to a UseCase.

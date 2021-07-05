@@ -1,6 +1,5 @@
 require_relative '../lib/oha'
 
-
 class SomeUseCase
   include Oha
 end
@@ -59,8 +58,21 @@ RSpec.describe Oha do
         expect(subject.trigger(:foo)).to eq 'bar'
       end
 
-      it 'receives an event name as parameter'
-      it 'raises an error if the event name is unknown'
+      it 'receives an event name as parameter' do
+        subject = SomeUseCase.call(params) do |use_case|
+          use_case.bind(:foo).to(-> { 'bar' })
+        end
+
+        expect { subject.trigger(:foo) }.not_to raise_error
+      end
+
+      it 'raises an error if the event name is unknown' do
+        subject = SomeUseCase.call(params) do |use_case|
+          use_case.bind(:foo).to(-> { 'bar' })
+        end
+
+        expect { subject.trigger(:baz) }.to raise_error(Oha::Errors::EventNotDefined)
+      end
     end
   end
 end

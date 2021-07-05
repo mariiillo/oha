@@ -17,6 +17,7 @@ module Oha
     end
 
     describe '#to' do
+      let(:context) { double(set_callback: '#set callback called') }
       let(:instance) { described_class.new(context).bind(event) }
       let(:callable_object) { double(call: '#call called') }
 
@@ -29,7 +30,11 @@ module Oha
         expect(instance.to(callable_object)).to be_an_instance_of(described_class)
       end
 
-      it 'sets the behaviour'
+      it 'sets the behaviour' do
+        instance.to(callable_object)
+
+        expect(context).to have_received(:set_callback).with(:some_event, callable_object)
+      end
     end
   end
 end
