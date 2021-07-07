@@ -28,9 +28,9 @@ Or install it yourself as:
 In the calling object:
 ```ruby
 SomeUseCase.call(params) do |use_case|
-    use_case.bind(:success).to(redirect_to_user)
-    use_case.bind(:data_invalid).to(render_new)
-    use_case.bind(:another_error).to(do_something_different)
+  use_case.bind(:success).to(redirect_to_user)
+  use_case.bind(:data_invalid).to(render_new)
+  use_case.bind(:another_error).to(do_something_different)
 end
 
 def redirect_to_user
